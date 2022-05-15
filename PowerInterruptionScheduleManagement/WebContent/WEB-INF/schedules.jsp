@@ -25,7 +25,7 @@ if (request.getParameter("hidScheduleIDSave") == "")
 else//Update----------------------
  { 
  stsMsg = scheduleObj.updatePowerInterruptionSchedules(request.getParameter("hidScheduleIDSave"), 
- request.getParameter("scheduleID"), 
+ //request.getParameter("scheduleID"), 
  request.getParameter("province"), 
  request.getParameter("area"), 
  request.getParameter("sGroup"), 
