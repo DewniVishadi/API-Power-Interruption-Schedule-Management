@@ -1,35 +1,50 @@
-<%@page import="model.Item"%>
+<%@page import="model.Schedule"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-if (request.getParameter("itemCode") != null) 
+if (request.getParameter("province") != null) 
 { 
- Item itemObj = new Item(); 
+ Schedule scheduleObj = new Schedule(); 
  String stsMsg = ""; 
+ 
 //Insert--------------------------
-if (request.getParameter("hidItemIDSave") == "") 
+if (request.getParameter("hidScheduleIDSave") == "") 
  { 
- stsMsg = itemObj.insertItem(request.getParameter("itemCode"), 
- request.getParameter("itemName"), 
- request.getParameter("itemPrice"), 
- request.getParameter("itemDesc")); 
+ stsMsg = scheduleObj.insertPowerInterruptionSchedules(request.getParameter("province"), 
+ request.getParameter("area"), 
+ request.getParameter("sGroup"),
+ request.getParameter("day"), 
+ request.getParameter("month"),
+ request.getParameter("startDay"), 
+ request.getParameter("endDay"),
+ request.getParameter("year"), 
+ request.getParameter("startTime"),
+ request.getParameter("endTime")); 
  } 
+
 else//Update----------------------
  { 
- stsMsg = itemObj.updateItem(request.getParameter("hidItemIDSave"), 
- request.getParameter("itemCode"), 
- request.getParameter("itemName"), 
- request.getParameter("itemPrice"), 
- request.getParameter("itemDesc")); 
+ stsMsg = scheduleObj.updatePowerInterruptionSchedules(request.getParameter("hidScheduleIDSave"), 
+ request.getParameter("scheduleID"), 
+ request.getParameter("province"), 
+ request.getParameter("area"), 
+ request.getParameter("sGroup"), 
+ request.getParameter("day"), 
+ request.getParameter("month"),
+ request.getParameter("startDay"), 
+ request.getParameter("endDay"), 
+ request.getParameter("year"),
+ request.getParameter("startTime"),
+ request.getParameter("endTime")); 
  } 
  session.setAttribute("statusMsg", stsMsg); 
 } 
 //Delete-----------------------------
-if (request.getParameter("hidItemIDDelete") != null) 
+if (request.getParameter("hidScheduleIDDelete") != null) 
 { 
- Item itemObj = new Item(); 
+ Schedule scheduleObj = new Schedule(); 
  String stsMsg = 
- itemObj.deleteItem(request.getParameter("hidItemIDDelete")); 
+scheduleObj.deletePowerInterruptionSchedules(request.getParameter("hidScheduleIDDelete")); 
  session.setAttribute("statusMsg", stsMsg); 
 }
 
