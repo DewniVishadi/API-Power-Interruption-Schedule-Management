@@ -48,6 +48,27 @@ $(document).on("click", "#btnSave", function(event)
 	$("#formStudent")[0].reset();		
 });
 
+// UPDATE==========================================
+$(document).on("click", ".btnUpdate", function(event) 
+{ 
+ $("#hidScheduleIDSave").val($(this).closest("tr").find('#hidScheduleIDUpdate').val());
+  
+ $("#province").val($(this).closest("tr").find('td:eq(0)').text()); 
+ $("#area").val($(this).closest("tr").find('td:eq(1)').text()); 
+ $("#sGroup").val($(this).closest("tr").find('td:eq(2)').text()); 
+ $("#day").val($(this).closest("tr").find('td:eq(3)').text()); 
+ $("#month").val($(this).closest("tr").find('td:eq(0)').text()); 
+ $("#startDay").val($(this).closest("tr").find('td:eq(1)').text()); 
+ $("#endDay").val($(this).closest("tr").find('td:eq(2)').text()); 
+ $("#year").val($(this).closest("tr").find('td:eq(3)').text());
+ $("#startTime").val($(this).closest("tr").find('td:eq(0)').text()); 
+ $("#endTime").val($(this).closest("tr").find('td:eq(1)').text()); 
+});
+
+
+
+
+
 // REMOVE==========================================
 $(document).on("click", ".remove", function(event) 
 { 
