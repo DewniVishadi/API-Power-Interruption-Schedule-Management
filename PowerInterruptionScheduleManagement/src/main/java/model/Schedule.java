@@ -66,6 +66,10 @@ public class Schedule
 		 return output;
 	}
 	
+	
+	
+	
+	
 	public String readPowerInterruptionSchedules()
 	{
 		 String output = "";
@@ -81,8 +85,8 @@ public class Schedule
 			 output = "<table border='1'><tr><th>Schedule ID</th><th>Province</th><th>Area</th><th>Group</th>" +
 					 "<th>Day</th>" +
 					 "<th>Month</th>" +
-					 "<th>From</th>" +
-					 "<th>To</th>" +
+					 "<th>Week From</th>" +
+					 "<th> Week To</th>" +
 					 "<th>Year</th>" +
 					 "<th>Time From</th>" +
 					 "<th>Time To</th></tr>";
@@ -107,7 +111,7 @@ public class Schedule
 				 String endTime = rs.getString("endTime");
 				 
 				 // Add into the html table
-				 output += "<tr><td>" + scheduleID + "</td>";
+				 output += "<tr><td><input id='hidScheduleIDUpdate' name='hidScheduleIDUpdate' type='hidden' value='" + scheduleID + "</td>";
 				 output += "<td>" + province + "</td>";
 				 output += "<td>" + area + "</td>";
 				 output += "<td>" + sGroup + "</td>";
@@ -120,6 +124,10 @@ public class Schedule
 				 output += "<td>" + endTime + "</td></tr>";
 				 
 				 // buttons
+				 output += "<td><input name='btnUpdate' type='button' value='Update' class=' btnUpdate btn btn-secondary'></td>" +
+						 		"<td><form method='post' action='schedules.jsp'> " +
+						 		"<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'> " +
+						 		"<input name='hidScheduleIDDelete' type='hidden' value='" + scheduleID + "'>" + "</form></td></tr>";
 				 //output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + "<td><form method='post' action='electricityrequests.jsp'>" + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + "<input name='scheduleID' type='hidden' value='" + scheduleID + "'>" + "</form></td></tr>";
 			 }
 			 con.close();
