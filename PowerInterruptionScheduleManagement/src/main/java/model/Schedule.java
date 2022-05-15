@@ -89,7 +89,8 @@ public class Schedule
 					 "<th> Week To</th>" +
 					 "<th>Year</th>" +
 					 "<th>Time From</th>" +
-					 "<th>Time To</th></tr>";
+					 "<th>Time To</th>" +
+					 "<th>Update</th><th>Remove</th></tr>";
 			
 			 String query = "select * from poweinterruptionschedules";
 			 Statement stmt = con.createStatement();
@@ -111,7 +112,7 @@ public class Schedule
 				 String endTime = rs.getString("endTime");
 				 
 				 // Add into the html table
-				 output += "<tr><td><input id='hidScheduleIDUpdate' name='hidScheduleIDUpdate' type='hidden' value='" + scheduleID + "</td>";
+				 output += "<tr><td>" + scheduleID + "</td>";
 				 output += "<td>" + province + "</td>";
 				 output += "<td>" + area + "</td>";
 				 output += "<td>" + sGroup + "</td>";
@@ -121,16 +122,18 @@ public class Schedule
 				 output += "<td>" + endDay + "</td>";
 				 output += "<td>" + year + "</td>";
 				 output += "<td>" + startTime + "</td>";
-				 output += "<td>" + endTime + "</td></tr>";
+				 output += "<td>" + endTime + "</td>";
 				 
 				 // buttons
-				 output += "<td><input name='btnUpdate' type='button' value='Update' class=' btnUpdate btn btn-secondary'></td>" +
-						 		"<td><form method='post' action='schedules.jsp'> " +
-						 		"<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'> " +
-						 		"<input name='hidScheduleIDDelete' type='hidden' value='" + scheduleID + "'>" + "</form></td></tr>";
-				 //output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + "<td><form method='post' action='electricityrequests.jsp'>" + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + "<input name='scheduleID' type='hidden' value='" + scheduleID + "'>" + "</form></td></tr>";
+				 output += "<td><input name='btnUpdate' type='button' value='Update' " +
+				 				"class=' btnUpdate btn btn-secondary' data-scheduleid= '" + scheduleID + "'></td>" +
+						 		"<td><input name='btnRemove' type='button' value='Remove' " +
+						 		"class='btnRemove btn btn-danger' data-scheduleid='" +scheduleID + "'></td></tr>";
+				
 			 }
+			 
 			 con.close();
+			 
 			 // Complete the html table
 			 output += "</table>";
 		 }
