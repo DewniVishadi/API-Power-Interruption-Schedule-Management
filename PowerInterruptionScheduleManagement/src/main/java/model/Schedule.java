@@ -56,11 +56,15 @@ public class Schedule
 			 preparedStmt.execute();
 			 con.close();
 			 
-			 output = "Inserted successfully";
+			 String newSchedules = readPowerInterruptionSchedules(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + 
+					 newSchedules + "\"}"; 
+
+			 //output = "Inserted successfully";
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while inserting the power interruption schedule.";
+			 output = "{\"status\":\"error\",\"data\":\"Error while inserting the schedule.\"}";
 			 System.err.println(e.getMessage());
 		 }
 		 return output;
@@ -145,6 +149,9 @@ public class Schedule
 		 return output;
 	}
 	
+	
+	
+	
 	//update function
 	public String updatePowerInterruptionSchedules(String ID, String province_s, String area_s, String group_s, String day_s, String month_s, String startday_s, String endday_s, String year_s, String starttime_s, String endtime_s)
 	{
@@ -179,17 +186,25 @@ public class Schedule
 			 preparedStmt.execute();
 			 con.close();
 			 
-			 output = "Updated successfully";
+			 String newSchedules = readPowerInterruptionSchedules(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + 
+					 newSchedules + "\"}"; 
+
+			 //output = "Updated successfully";
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while updating the electricity connection request.";
+			 output = "{\"status\":\"error\", \"data\": \"Error while updating the schedule.\"}"; 
+
 			 System.err.println(e.getMessage());
 		 }
 		 
 		 return output;
 		 
 	}
+	
+	
+	
 	
 	// delete function
 	public String deletePowerInterruptionSchedules(String scheduleID )
@@ -216,12 +231,15 @@ public class Schedule
 			 preparedStmt.execute();
 			 con.close();
 			 
-			 output = "Deleted successfully";
+			 String newSchedules = readPowerInterruptionSchedules(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + 
+					 newSchedules + "\"}";
+			 //output = "Deleted successfully";
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while deleting the item.";
-			 System.err.println(e.getMessage());
+			 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+					 System.err.println(e.getMessage()); 
 		 }
 		 return output;
 		 }
