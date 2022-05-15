@@ -6,12 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException; 
+import java.util.HashMap; 
+import java.util.Map; 
+import java.util.Scanner;
+
 
 /**
  * Servlet implementation class SchedulesAPI
  */
 @WebServlet("/SchedulesAPI")
 public class SchedulesAPI extends HttpServlet {
+	Schedule scheduleObj = new Schedule();
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -35,14 +41,69 @@ public class SchedulesAPI extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String output = scheduleObj.insertPowerInterruptionSchedules(request.getParameter("province"), 
+				 request.getParameter("area"), 
+				request.getParameter("sGroup"), 
+				request.getParameter("day"),
+				request.getParameter("month"),
+				request.getParameter("startDay"),
+				request.getParameter("endDay"),
+				request.getParameter("year"),
+				request.getParameter("startTime"),
+				request.getParameter("endTime")); 
+				
+		response.getWriter().write(output); 
+		
+		//doGet(request, response);
 	}
+
+	// Convert request parameters to a Map
+	private static Map getParasMap(HttpServletRequest request) 
+	{ 
+		Map<String, String> map = new HashMap<String, String>(); 
+		try
+		{ 
+			 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
+			 String queryString = scanner.hasNext() ? 
+			 scanner.useDelimiter("\\A").next() : ""; 
+			 
+			 scanner.close(); 
+			 
+			 String[] params = queryString.split("&"); 
+			 for (String param : params) 
+			 { 
+				 String[] p = param.split("="); 
+				 map.put(p[0], p[1]); 
+			 } 
+		 } 
+				
+		catch (Exception e) 
+		{ 
+		} 
+		return map; 
+	}
+	 
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		 Map paras = getParasMap(request); 
+		 
+		 String output = scheduleObj.updatePowerInterruptionSchedules(paras.get("hidScheduleIDSave").toString(), 
+						 paras.get("province").toString(), 
+						 paras.get("area").toString(), 
+						 paras.get("sGroup").toString(),
+						 paras.get("day").toString(), 
+						 paras.get("month").toString(), 
+						 paras.get("startDay").toString(),
+						 paras.get("endDay").toString(), 
+						 paras.get("year").toString(), 
+						 paras.get("startTime").toString(),
+						 paras.get("endTime").toString()); 
+		 response.getWriter().write(output); 
 	}
 
 	/**
@@ -50,6 +111,11 @@ public class SchedulesAPI extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Map paras = getParasMap(request); 
+		
+		String output = scheduleObj.deletePowerInterruptionSchedules(paras.get("scheduleID").toString()); 
+		
+		response.getWriter().write(output); 
 	}
 
 }
