@@ -17,14 +17,14 @@ $(document).on("click", "#btnSave", function(event)
 	$("#alertError").hide();
 
 	// Form validation-------------------
-	var status = validateItemForm(); 
+	var status = validateScheduleForm(); 
 	
 	// If not valid
 	if (status != true) 
 	{ 
 	 $("#alertError").text(status); 
 	 $("#alertError").show(); 
-	return; 
+		return; 
 	}
 
 	// If valid------------------
@@ -57,12 +57,12 @@ $(document).on("click", ".btnUpdate", function(event)
  $("#area").val($(this).closest("tr").find('td:eq(1)').text()); 
  $("#sGroup").val($(this).closest("tr").find('td:eq(2)').text()); 
  $("#day").val($(this).closest("tr").find('td:eq(3)').text()); 
- $("#month").val($(this).closest("tr").find('td:eq(0)').text()); 
- $("#startDay").val($(this).closest("tr").find('td:eq(1)').text()); 
- $("#endDay").val($(this).closest("tr").find('td:eq(2)').text()); 
- $("#year").val($(this).closest("tr").find('td:eq(3)').text());
- $("#startTime").val($(this).closest("tr").find('td:eq(0)').text()); 
- $("#endTime").val($(this).closest("tr").find('td:eq(1)').text()); 
+ $("#month").val($(this).closest("tr").find('td:eq(4)').text()); 
+ $("#startDay").val($(this).closest("tr").find('td:eq(5)').text()); 
+ $("#endDay").val($(this).closest("tr").find('td:eq(6)').text()); 
+ $("#year").val($(this).closest("tr").find('td:eq(7)').text());
+ $("#startTime").val($(this).closest("tr").find('td:eq(8)').text()); 
+ $("#endTime").val($(this).closest("tr").find('td:eq(9)').text()); 
 });
 
 
@@ -80,7 +80,7 @@ $(document).on("click", ".remove", function(event)
 
 
 // CLIENT-MODEL=================================================================
-function validateItemForm() 
+function validateScheduleForm() 
 { 
 	// PROVINCE
 	if ($("#province").val() == "0") 
